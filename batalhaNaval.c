@@ -1,6 +1,5 @@
 #include <stdio.h>
 #include <stdbool.h>
-#include <stdlib.h>
 
 int matriz[7][7] = { // Tamanho do campo
         {0,0,0,0,0,0,0},
@@ -17,7 +16,8 @@ char letras[7] = {'A', 'B', 'C', 'D', 'E', 'F', 'G'};
 int display[7][7] = { 0 }; // Esse é o visual, e vai mudando conforme for acertando
 
 void quadro_naval(){ // Função que mostra o display
-
+    
+    
     int tamanho = 7; 
     
     printf("  ");// Letras na parte superior do jogo
@@ -40,7 +40,7 @@ void quadro_naval(){ // Função que mostra o display
 }
 
 bool checar_local(char chute[2]) { //checa se o a possição escolhida é valida e altera no display
-    system("cls");
+    
     char letra_num = chute[0];
     int numero = chute[1] - '0' -1;// O (- '0') é para "ignorar" o código ASCII e tentar pegar os números de 1 a 7
 
@@ -86,17 +86,15 @@ bool checar_local(char chute[2]) { //checa se o a possição escolhida é valida
 
     if (matriz[numero][letra_num] == 0)
     {
-        printf("\nVocê atirou na água\n");
+        printf("\nVocê atirou na água\n\n");
         display[numero][letra_num] = 1;
         matriz[numero][letra_num] = 1;
     } else if (matriz[numero][letra_num] == 3){
-        printf("\nVocê acertou um navio\n");
+        printf("\nVocê acertou um navio\n\n");
         display[numero][letra_num] = 3;
     } else {
-        printf("Você já tentou essa casa.\n");
+        printf("\nVocê já tentou essa casa.\n\n");
     }
-    
-    quadro_naval();
 
 }
 
@@ -116,11 +114,11 @@ int main(){
     char resposta[2] = "A1";
 
     printf("Escolha uma letra e um número para atacar Ex: A1\n");
-    quadro_naval();
 
     do{
-    scanf("%s", &resposta);
-    checar_local(resposta);
+        quadro_naval();
+        scanf("%s", &resposta);
+        checar_local(resposta);
     } while (compararCampos(matriz,display,7));
     printf("Você acertou todos os navios");
 
